@@ -26,6 +26,8 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
     UpdateFailed,
 )
+import html
+import itertools
 
 CONF_L = "L"
 CONF_NAME = "name"
@@ -37,7 +39,7 @@ CONF_TICKERID = "tickerID"
 CONF_START = "start"
 CONF_EQSTOPS = "eqstops"
 CONF_SHOWJOURNEYS = "showJourneys"
-CONF_ADDITIONALTIME = "additionaTime"
+CONF_ADDITIONALTIME = "additionalTime"
 CONF_ICON = "icon"
 
 SCAN_INTERVAL = timedelta(seconds=30)
@@ -53,7 +55,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
         vol.Optional(CONF_TICKERID, default="dep"): cv.string,
         vol.Optional(CONF_START, default="yes"): cv.string,
         vol.Optional(CONF_EQSTOPS, default="false"): cv.string,
-        vol.Optional(CONF_SHOWJOURNEYS, default=12): cv.Number,
+        vol.Optional(CONF_SHOWJOURNEYS, default=12): cv.Number, 
         vol.Optional(CONF_ADDITIONALTIME, default=0): cv.Number,
         #vol.Optional(CONF_ICON, default="mdi:tram"): cv.string,
     }
@@ -160,7 +162,7 @@ class OebbCoordinator(DataUpdateCoordinator):
             hass,
             _LOGGER,
             # Name of the data. For logging purposes.
-            name="My sensor",
+            name="OEBB Coordinator",
             # Polling interval. Will only be polled if there are subscribers.
             update_interval=timedelta(seconds=30),
         )
