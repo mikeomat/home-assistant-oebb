@@ -27,7 +27,7 @@ from homeassistant.helpers.update_coordinator import (
     UpdateFailed,
 )
 import html
-import itertools
+from itertools import islice
 
 CONF_L = "L"
 CONF_NAME = "name"
